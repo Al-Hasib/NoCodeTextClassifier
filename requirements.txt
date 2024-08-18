@@ -8,3 +8,5 @@ nltk
 wordcloud
 joblib
 from_root
+
+-e .
