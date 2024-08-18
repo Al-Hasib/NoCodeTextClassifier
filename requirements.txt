@@ -7,3 +7,4 @@ pathlib
 nltk
 wordcloud
 joblib
+from_root
