@@ -1,0 +1,9 @@
+ipykernel
+pandas
+scikit-learn
+matplotlib
+seaborn
+pathlib
+nltk
+wordcloud
+joblib
