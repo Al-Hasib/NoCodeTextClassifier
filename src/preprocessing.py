@@ -5,7 +5,7 @@ from nltk.stem import WordNetLemmatizer
 
 class TextCleaner:
     '''Class for cleaning Text'''
-    def __init__(self, currency_symbols, stop_words=None, lemmatizer=None):
+    def __init__(self, currency_symbols = r'[\$\£\€\¥\₹\¢\₽\₩\₪]', stop_words=None, lemmatizer=None):
         self.currency_symbols = currency_symbols
         
         if stop_words is None:
