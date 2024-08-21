@@ -1,6 +1,6 @@
-from src.preprocessing import *
-from src.utils import *
-from src.models import *
+from NoCodeTextClassifier.preprocessing import *
+from NoCodeTextClassifier.utils import *
+from NoCodeTextClassifier.models import *
 
 
 if __name__=="__main__":

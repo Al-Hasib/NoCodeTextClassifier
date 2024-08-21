@@ -34,21 +34,20 @@ def get_requirements_chatgpt(file_path: str) -> List[str]:
 
 setup(
     name='NoCodeTextClassifier',
-    version='0.0.1',
+    version='0.0.4',
     author='abdullah',
     author_email='alhasib.iu.cse@gmail.com',
     description="This package is for Text Classification of NLP Task",
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
     url="https://github.com/Al-Hasib/NoCodeTextClassifier",
-    install_requires=get_requirements("requirements.txt"),
+    install_requires=["pandas","scikit-learn","matplotlib","seaborn","pathlib","nltk","xgboost"],
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],  # Additional metadata
-    python_requires='>=3.8',  # Minimum Python version required
-    include_package_data=True 
+    python_requires='>=3.8',  # Minimum Python version required 
 )
 

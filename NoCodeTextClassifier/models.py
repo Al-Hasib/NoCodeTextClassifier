@@ -1,13 +1,10 @@
-from sklearn.linear_model import LogisticRegression
-from sklearn.svm import LinearSVC, SVC
-from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import GradientBoostingClassifier
 import xgboost as xgb
 # import lightgbm as lgb
 # from catboost import CatBoostClassifier
 
-from src.utils import *
+from NoCodeTextClassifier.utils import *
 
 class Models:
     def __init__(self, X_train,X_test, y_train, y_test):
@@ -16,6 +13,19 @@ class Models:
         self.X_test = X_test
         self.y_test = y_test
         os.makedirs("models",exist_ok=True)
+    
+
+    def LogisticRegression(self, **kwargs):
+        from sklearn.linear_model import LogisticRegression
+        model = LogisticRegression(**kwargs)
+        model.fit(self.X_train, self.y_train)
+        save_path = os.path.join("models", 'LogisticRegression.pkl')
+        with open(save_path, 'wb') as f:
+            pickle.dump(model, f)
+        print("Training Completed")
+        evaluation('LogisticRegression.pkl', self.X_test,self.y_test)
+        print("Finished")
+
         
     
     def DecisionTree(self, **kwargs):
@@ -42,6 +52,18 @@ class Models:
         print("Training Completed")
 
     
+    def SVC(self, **kwargs):
+        from sklearn.svm import SVC
+        model = SVC(**kwargs)
+        model.fit(self.X_train, self.y_train)
+        save_path = os.path.join("models", 'SVC.pkl')
+        with open(save_path, 'wb') as f:
+            pickle.dump(model, f)
+
+        evaluation('SVC.pkl', self.X_test,self.y_test)
+        print("Training Completed")
+
+    
     def RandomForestClassifier(self, **kwargs):
         from sklearn.ensemble import RandomForestClassifier
         model = RandomForestClassifier(**kwargs)
@@ -64,5 +86,19 @@ class Models:
 
         evaluation('MultinomialNB.pkl', self.X_test,self.y_test)
         print("Training Completed")
+
+    
+    def GaussianNB(self, **kwargs):
+        from sklearn.naive_bayes import GaussianNB
+        model = GaussianNB(**kwargs)
+        model.fit(self.X_train, self.y_train)
+        save_path = os.path.join("models", 'GaussianNB.pkl')
+        with open(save_path, 'wb') as f:
+            pickle.dump(model, f)
+
+        evaluation('GaussianNB.pkl', self.X_test,self.y_test)
+        print("Training Completed")
+
+    
 
 

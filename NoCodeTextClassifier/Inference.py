@@ -1,5 +1,4 @@
-import joblib
-from src.preprocessing import *
+from NoCodeTextClassifier.preprocessing import *
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
 from pathlib import Path

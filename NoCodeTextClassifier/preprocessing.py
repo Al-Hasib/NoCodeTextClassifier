@@ -8,8 +8,8 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import string
 import os
-from sklearn.feature_extraction.text import TfidfVectorizer
-from from_root import from_root
+from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
+
 
 
 nltk.download('stopwords')
@@ -125,4 +125,18 @@ class Vectorization:
             pickle.dump(vectorizer, f)
         
         return tfidf_vectorizer
+    
+    def CountVectorizer(self, **kwargs):
+        # Step 1: Fit the Vectorizer on the Training Data
+        vectorizer = CountVectorizer(**kwargs)
+        count_vectorizer = vectorizer.fit_transform(self.df[self.text])
+        print(count_vectorizer.toarray().shape)
+        os.makedirs(self.vectorizer_dir,exist_ok=True)
+        save_path = os.path.join(self.vectorizer_dir, 'count_vectorizer.pkl')
+        with open(save_path, 'wb') as f:
+            pickle.dump(vectorizer, f)
+        
+        return count_vectorizer
+    
+    
     
