@@ -1,13 +1,10 @@
-ipykernel
 pandas
 scikit-learn
 matplotlib
 seaborn
 pathlib
 nltk
-wordcloud
 joblib
-from_root
-eng-text-cleaner
+xgboost
 
 -e .

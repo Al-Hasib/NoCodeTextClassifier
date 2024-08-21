@@ -79,7 +79,13 @@ class process:
     
     def encoder_class(self, df):
         encoder = LabelEncoder()
-        return encoder.fit_transform(df[self.target_feature])
+        target = encoder.fit_transform(df[self.target_feature])
+        os.makedirs("artifacts",exist_ok=True)
+        save_path = os.path.join("artifacts", 'encoder.pkl')
+        with open(save_path, 'wb') as f:
+            pickle.dump(encoder, f)
+
+        return target
     
     def clean_text(self, df):
         text_cleaner = TextCleaner()
@@ -119,34 +125,4 @@ class Vectorization:
             pickle.dump(vectorizer, f)
         
         return tfidf_vectorizer
-
-        
-
-
-
-if __name__=="__main__":
-    data_path = r"C:\Users\abdullah\projects\NLP_project\NoCodeTextClassifier\ML Engineer\train.csv"
-
-    process = process(data_path,'email','class')
-
-    df = process.processing()
-
-    print(df.head())
-
-    Vectorization = Vectorization(df,'clean_text')
-
-    TfidfVectorizer = Vectorization.TfidfVectorizer(max_features= 10000)
-
-        # Step 3: Load the Saved Vectorizer
-    with open(os.path.join('vectorizers','tfidf_vectorizer.pkl'), 'rb') as f:
-        loaded_vectorizer = pickle.load(f)
-
-    # Step 4: Transform the Test Data with the Loaded Vectorizer
-    X_test_tfidf = loaded_vectorizer.transform(df['clean_text'])
-
-    X_train, X_test, y_train, y_test = process.split_data(df['clean_text'], df['labeled_target'])
-
-    print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
-
-    # Optional: Print the transformed test data
-    print(X_test_tfidf.toarray().shape)
+    

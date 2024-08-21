@@ -37,6 +37,18 @@ setup(
     version='0.0.1',
     author='abdullah',
     author_email='alhasib.iu.cse@gmail.com',
+    description="This package is for Text Classification of NLP Task",
+    long_description=open('README.md').read(),
+    long_description_content_type="text/markdown",
+    url="https://github.com/Al-Hasib/NoCodeTextClassifier",
     install_requires=get_requirements("requirements.txt"),
-    packages=find_packages()
+    packages=find_packages(),
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],  # Additional metadata
+    python_requires='>=3.8',  # Minimum Python version required
+    include_package_data=True 
 )
+
