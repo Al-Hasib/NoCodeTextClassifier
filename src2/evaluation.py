@@ -1,7 +1,7 @@
 import pandas as pd
 from pathlib import Path
 from sklearn.feature_extraction.text import TfidfVectorizer
-from src.preprocessing import *
+from src2.preprocessing import *
 import joblib
 
 # define the path

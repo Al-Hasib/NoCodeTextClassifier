@@ -1,5 +1,5 @@
 import joblib
-from preprocessing import *
+from src2.preprocessing import *
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
 from pathlib import Path

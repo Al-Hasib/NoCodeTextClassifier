@@ -8,5 +8,6 @@ nltk
 wordcloud
 joblib
 from_root
+eng-text-cleaner
 
 -e .
