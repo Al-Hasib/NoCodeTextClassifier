@@ -1,5 +1,4 @@
 from NoCodeTextClassifier.preprocessing import *
-from NoCodeTextClassifier.utils import *
 from NoCodeTextClassifier.models import *
 
 

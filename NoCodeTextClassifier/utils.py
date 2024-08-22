@@ -7,6 +7,10 @@ def load_model(model_name):
         model = pickle.load(f)
     return model
 
+def load_artifacts(folder_name, file_name):
+    with open(os.path.join(folder_name,file_name), 'rb') as f:
+        model = pickle.load(f)
+    return model
 
 def prediction(model, X_test):
     model = load_model(model)

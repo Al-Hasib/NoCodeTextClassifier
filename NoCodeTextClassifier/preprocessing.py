@@ -9,7 +9,8 @@ from nltk.stem import WordNetLemmatizer
 import string
 import os
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-
+from NoCodeTextClassifier import utils
+import numpy as np
 
 
 nltk.download('stopwords')
@@ -105,7 +106,7 @@ class process:
     
 
 class Vectorization:
-    def __init__(self, dataframe, text_feature):
+    def __init__(self, dataframe=np.zeros((5,5)), text_feature='text_feature'):
         self.df = dataframe
         self.text = text_feature
 
@@ -114,9 +115,14 @@ class Vectorization:
 
 
 
-    def TfidfVectorizer(self, **kwargs):
+    def TfidfVectorizer(self, eval=False, string="text", **kwargs):
         # Step 1: Fit the Vectorizer on the Training Data
         vectorizer = TfidfVectorizer(**kwargs)
+        if eval==True:
+            tfidf_vectorizer = utils.load_artifacts("vectorizers","tfidf_vectorizer.pkl")
+            return tfidf_vectorizer.transform([string])
+            
+
         tfidf_vectorizer = vectorizer.fit_transform(self.df[self.text])
         print(tfidf_vectorizer.toarray().shape)
         os.makedirs(self.vectorizer_dir,exist_ok=True)
@@ -126,9 +132,12 @@ class Vectorization:
         
         return tfidf_vectorizer
     
-    def CountVectorizer(self, **kwargs):
+    def CountVectorizer(self, eval=False, string="text",**kwargs):
         # Step 1: Fit the Vectorizer on the Training Data
         vectorizer = CountVectorizer(**kwargs)
+        if eval==True:
+            tfidf_vectorizer = utils.load_artifacts("vectorizers","count_vectorizer.pkl")
+            return tfidf_vectorizer.transform([string])
         count_vectorizer = vectorizer.fit_transform(self.df[self.text])
         print(count_vectorizer.toarray().shape)
         os.makedirs(self.vectorizer_dir,exist_ok=True)
