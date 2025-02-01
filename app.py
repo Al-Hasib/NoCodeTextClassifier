@@ -1,34 +1,55 @@
-from NoCodeTextClassifier.preprocessing import *
-from NoCodeTextClassifier.utils import *
-from NoCodeTextClassifier.models import *
-from NoCodeTextClassifier import inference
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+from NoCodeTextClassifier.EDA import Informations, Visualizations
+
+st.title('No Code Text Classification App')
+st.write('Understand the behavior of your text data and train a model to classify the text data')
+section = st.sidebar.radio("Choose Section", ["Data Analysis", "Train Model", "Predictions"])
+# CSV upload
+# Upload Data
+st.sidebar.subheader("Upload Your Dataset")
+train_data = st.sidebar.file_uploader("Upload training data", type=["csv"])
+test_data = st.sidebar.file_uploader("Upload test data", type=["csv"])
+
+if train_data is not None and test_data is not None:
+    train_df = pd.read_csv(train_data)
+    test_df = pd.read_csv(test_data)
+    st.write("Training Data")
+    st.write(train_df.head(3))
+    columns = train_df.columns.tolist()
+    text_data = st.sidebar.selectbox("Choose the text column:", columns)
+    target = st.sidebar.selectbox("Choose the target column:", columns)
 
 
-if __name__=="__main__":
-    # data_path = r"C:\Users\abdullah\projects\NLP_project\NoCodeTextClassifier\ML Engineer\train.csv"
 
-    # process = process(data_path,'email','class')
+    
 
-    # df = process.processing()
+if section=="Data Analysis":
+    st.subheader("Get Insights from the Data")
+    info = Informations(train_df, text_data, target)
+    st.write("Data Shape:", info.shape())
+    st.write("Class Imbalance:", info.class_imbalanced())
+    st.write("Missing Values:", info.missing_values())
+    train_df['clean_text'] = info.clean_text()
+    train_df['text_length'] = info.text_length()
+    train_df['target'] = info.label_encoder()
+    st.write(train_df.head(3))
+    st.write(info.analysis_text_length('text_length'))
+    st.write("Correlation between Text Length and Target:", info.correlation('text_length'))
 
-    # print(df.head())
 
-    # Vectorization = Vectorization(df,'clean_text')
+    st.subheader("Visualizations")
+    vis = Visualizations(train_df, text_data, target)
+    vis.class_distribution()
+    vis.text_length_distribution()
 
-    # TfidfVectorizer = Vectorization.TfidfVectorizer(max_features= 10000)
-    # print(TfidfVectorizer.toarray())
-    # X_train, X_test, y_train, y_test = process.split_data(TfidfVectorizer.toarray(), df['labeled_target'])
+if section=="Train Model":
+    st.subheader("Train a Model")
+    st.radio("Choose ", ["Logistic Regression", "Random Forest"])
+    
 
-    # print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
-    # # print(X_train, y_train)
-    # models = Models(X_train=X_train,X_test = X_test, y_train = y_train, y_test = y_test)
-
-    # models.DecisionTree()
-
-    # print("\n\n")
-
-    # print("Started Inference : \n\n")
-    text = input("Enter your text:\n")
-
-    inference.prediction(text)
-
+if section=="Predictions":
+    st.subheader("Perform Predictions on the Test Data")
+    

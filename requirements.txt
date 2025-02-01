@@ -6,5 +6,6 @@ pathlib
 nltk
 joblib
 xgboost
+streamlit
 
 -e .
