@@ -1,6 +1,7 @@
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import GradientBoostingClassifier
 import xgboost as xgb
+import streamlit as st
 # import lightgbm as lgb
 # from catboost import CatBoostClassifier
 
@@ -23,6 +24,8 @@ class Models:
         with open(save_path, 'wb') as f:
             pickle.dump(model, f)
         print("Training Completed")
+        st.markdown("**Training Completed**")
+
         evaluation('LogisticRegression.pkl', self.X_test,self.y_test)
         print("Finished")
 

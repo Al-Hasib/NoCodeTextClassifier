@@ -1,6 +1,7 @@
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 import pickle
 import os
+import streamlit as st
 
 def load_model(model_name):
     with open(os.path.join('models',model_name), 'rb') as f:
@@ -27,6 +28,10 @@ def evaluation(model, X_test, y_test):
     print(f"Accuracy of {model_name}: {accuracy}\n")
     print(f"Classification Report of {model_name} : \n{class_report}\n")
     print(f"Confusion Matrix of {model_name} : \n{conf_matrix}")
+
+    st.markdown(f"Accuracy of {model_name}: {accuracy}\n")
+    st.markdown(f"Classification Report of {model_name} : \n{class_report}\n")
+    st.markdown(f"Confusion Matrix of {model_name} : \n{conf_matrix}")
 
 
 

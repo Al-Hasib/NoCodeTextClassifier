@@ -35,7 +35,7 @@ class Informations:
     
     def analysis_text_length(self, text_length):
         result = self.data[text_length].describe()
-        return f"Statistics of Text Length: \n{result}"
+        return result
     
     def correlation(self, other_feature):
         return self.data[other_feature].corr(self.data["target"])
