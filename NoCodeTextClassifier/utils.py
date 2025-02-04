@@ -29,9 +29,11 @@ def evaluation(model, X_test, y_test):
     print(f"Classification Report of {model_name} : \n{class_report}\n")
     print(f"Confusion Matrix of {model_name} : \n{conf_matrix}")
 
-    st.markdown(f"Accuracy of {model_name}: {accuracy}\n")
-    st.markdown(f"Classification Report of {model_name} : \n{class_report}\n")
-    st.markdown(f"Confusion Matrix of {model_name} : \n{conf_matrix}")
+    st.markdown(f"Accuracy of **{model_name}**: **{accuracy*100}%**\n")
+    # st.markdown(f"\nClassification Report of **{model_name}** :\n")
+    # st.write(class_report)
+    st.markdown(f"\nConfusion Matrix of **{model_name}** : \n")
+    st.write(conf_matrix)
 
 
 
